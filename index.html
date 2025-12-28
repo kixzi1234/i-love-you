@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* กล่อง */
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 340px;
+    z-index: 2;
+}
+
+h1 {
+    color: #ff4d6d;
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff1e4d;
+}
+
+/* ซ่อนหน้า */
+.love, .page3 {
+    display: none;
+}
+
+/* กล่องรูป */
+.images {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.images img {
+    width: 90px;
+    border-radius: 15px;
+}
+
+/* เอฟเฟกต์ลอย */
+.float1 { animation: floating 3s ease-in-out infinite; }
+.float2 { animation: floating 3.5s ease-in-out infinite; }
+.float3 { animation: floating 4s ease-in-out infinite; }
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+/* หัวใจลอย */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 24px;
+    animation: floatUp linear infinite;
+    color: #ff4d6d;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- หน้า 1 -->
+<div class="box" id="login">
+    <h1>🔐</h1>
+    <p>ใส่รหัสที่นี่</p>
+    <input type="password" id="password" placeholder="ใส่รหัสที่นี่">
+    <br>
+    <button onclick="checkPass()">ยืนยัน</button>
+</div>
+
+<!-- หน้า 2 -->
+<div class="box love" id="lovePage">
+    <h1>รักเมียมากๆๆๆ </h1>
+
+    <div class="images">
+        <img src="love1.jpg" class="float1">
+        <img src="love2.jpg" class="float2">
+        <img src="love3.jpg" class="float3">
+    </div>
+
+    <p>
+        เค้ารักแฟนที่สุดเลยละอยากกอดมากๆๆๆๆเค้าขอโทดที่ดื้อไปเยอะเลย<br>
+        เธอเป็นคนที่เค้ารักมากกกกกกที่สุดในโลกอยากกอดมากๆๆๆอยากให้อยู่ด้วยตลอดไปเลย
+        อยู่กับเด่กดื้อไปตลอดนะคะจู๊บๆๆๆๆ<br>
+        
+    </p>
+
+    <button onclick="goPage3()">มีอะไรให้ดูด้วยย</button>
+</div>
+
+<!-- หน้า 3 -->
+<div class="box page3" id="page3">
+    <h1>🥺</h1>
+     <div class="images">
+        <img src="kuy1.jpg" class="float1">
+    <p>
+        อมควยนะคะ<br>
+        ควยของแฟนนะคะ<br>
+    </p>
+</div>
+
+<!-- เพลง -->
+<audio id="music" loop>
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function checkPass() {
+    const pass = document.getElementById("password").value;
+    if (pass === "210968") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("lovePage").style.display = "block";
+        document.getElementById("music").play();
+        startHearts();
+    } else {
+        alert("รหัสไม่ถูกต้องนะ");
+    }
+}
+
+function goPage3() {
+    document.getElementById("lovePage").style.display = "none";
+    document.getElementById("page3").style.display = "block";
+}
+
+/* หัวใจลอย */
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }, 200);
+}
+</script>
+
+</body>
+</html>
